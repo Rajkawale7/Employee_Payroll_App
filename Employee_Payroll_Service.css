@@ -44,6 +44,7 @@ body{
 *{
     box-sizing: border-box;
 }
+
 /* UC 2 ::: Employee Payroll App with With Header And Name */
 .form-content {
     min-height: calc(100% - 80px);
@@ -103,4 +104,22 @@ label {
     border: 1px solid rgb(159, 153, 153);
     border-radius: 4px;
     resize: vertical;
+}
+
+/* UC 3 ::: Ability to specify the profile pic in the form */
+.profile-radio-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-radio-content>label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile {
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 12px;
 }
