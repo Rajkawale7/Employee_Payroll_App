@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee_Payroll_Service</title>
-    <link rel="stylesheet" href="Employee_Payroll_Service.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Employee_Payroll_Service</title>
+        <link rel="stylesheet" href="Employee_Payroll_Service.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-</head>
-<body>
+    </head>
 
-    <header class="Header-content header">
-        <div class="logo-content">
-            <img src="./assets/Images/logo.png" alt="logo">
-        <div>
-            <span class="emp-text">EMPLOYEE</span> <br>
-            <span class="emp payroll">PAYROLL</span>
-        </div>
-        </div>
-    </header>
+    <body>
+
+        <header class="Header-content header">
+            <div class="logo-content">
+                <img src="./assets/Images/logo.png" alt="logo">
+            <div>
+                <span class="emp-text">EMPLOYEE</span> <br>
+                <span class="emp payroll">PAYROLL</span>
+            </div>
+            </div>
+
+            <!-- UC 2 ::: Employee Payroll Form With Header And Name -->
+
+            <div class="form-content">
+                <form class="form" action="#" onsubmit="save(event);return false">
+                    <div class="form-head"> Employee Payroll Form </div>
+                    <div class="row-content">
+                    <label for="name" class="label text">Name</label>
+                    <input type="text" name="name" id="name" class="input" placeholder="Your Name ..." required>
+                    </div>
+                </form>
+            </div>
+        </header>
+    </body>
+</html>
