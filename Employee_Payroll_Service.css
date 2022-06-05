@@ -124,7 +124,7 @@ label {
     margin-left: 12px;
 }
 
-/* UC 5 ::: Employee Payroll form with Gender, Department and Salary Range */
+/* UC 5 ::: Ability to specify the start date with Day, Month and Year as select input items */
 select {
     padding: 12px;
     border: 1px solid rgb(52, 190, 217);
@@ -156,13 +156,14 @@ select {
     font-weight: 400;
     min-width: 140px;
     padding: 7px 7px;
-    border: 1px solid#707070;
+    border: 1px solid#539bee;
+    background-color: rgb(163, 208, 237);
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .submitButton {
     border: 1px solid rgb(52, 190, 217);
-    background-color: white;
     margin-right: 30px;
 }
 
