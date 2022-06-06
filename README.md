@@ -19,6 +19,4 @@ UC7 ::: Using the UX design set the button style appropriately.
 
 UC8 ::: Ability to Set Event Listener on Salary Range to display appropriate value
 
-UC9 ::: On Form Submit populate the Employee Payroll Data Object by using *javascript function* 
-
-UC10 ::: Perform Validation Employee Payroll Data setter methods
+UC9 ::: On Form Submit populate the Employee Payroll Data Object by using *javascript function*  and worked and *UC 10* to Perform Validation Employee Payroll Data setter methods.
