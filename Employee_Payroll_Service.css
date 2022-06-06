@@ -29,6 +29,7 @@ body{
     border: solid 0px #dae2e9;
 }
 
+
 .emp-text{
     font: normal normal bold 20px/25px Montserrat;
     font-family: "Montserrat", sans-serif;
@@ -104,6 +105,13 @@ label {
     border: 1px solid rgb(52, 190, 217);
     border-radius: 4px;
     resize: vertical;
+}
+
+error-output{                       /*Day 44 - UC2 */
+    margin-left: 10px;
+    font-style: italic;
+    font-size: 12px;
+    color: red;
 }
 
 /* UC 3 ::: Ability to specify the profile pic in the form */

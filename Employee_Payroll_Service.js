@@ -19,7 +19,7 @@ class EmployeePayrollData{
     }
 
     set name(name){
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');          //UC 10 ::: Performing validation
+        let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z\\s]{2,}$');          //UC 10  & Day44-UC2 ::: Performing validation
         if (nameRegex.test(name))
             this._name = name;
         else throw "Name is Incorrect!";
