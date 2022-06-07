@@ -1,5 +1,5 @@
 // UC 9 ::: On Form Submit populate the Employee Payroll Data Object by using JavaScript function
-
+//Day 44 - UC1//
 class EmployeePayrollData{
     //constructor
     constructor(...params){
@@ -13,13 +13,22 @@ class EmployeePayrollData{
     }
 
     //getter and setter method
+    //Emp ID
+    get id(){
+        return this._id;
+    }
+
+    set id(id){
+        this._id = id;
+    }
+
     // Name
     get name() {
         return this._name;
     }
 
     set name(name){
-        let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z\\s]{2,}$');          //UC 10  & Day44-UC2 ::: Performing validation
+        let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z\\s]{2,}$')        //UC 10  & Day44-UC2 ::: Performing validation
         if (nameRegex.test(name))
             this._name = name;
         else throw "Name is Incorrect!";
@@ -29,7 +38,7 @@ class EmployeePayrollData{
     get profileImage() {
         return this._profileImage;
     }
-    set profileImage(value) {
+    set profileImage(profileImage) {
         this._profileImage = profileImage;
     }
 
@@ -84,57 +93,14 @@ class EmployeePayrollData{
     //Method
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const employeeDate = this.startDate == undefined ? "undefined" : this.startDate.toLocaleDateString("en-us", options);
+        const employeeDate = !this.startDate ? "undefined" : 
+                            this.startDate.toLocaleDateString("en-US", options);
         return "Name = " + this.name + ", Profile Image = " + this.profileImage + ", Gender = " + this.gender + ", Department = " + this.department + ", Salary = " + this.salary 
                 + ", Start Date = " + employeeDate + ", Notes = " + this.notes;
     }
 }
 
-function save() {
 
-    let employeeName = document.querySelector('#name').value;
-    let profileList = document.querySelectorAll('input[name="profile"]');
-    let employeeProfileImage;
-    for (let image of profileList) {
-        if (image.checked) {
-            employeeProfileImage = image.value;
-            break;
-        }
-    }
-
-    let genderList = document.querySelectorAll('input[name="gender"]');
-    let employeeGender;
-    for (let gender of genderList) {
-        if (gender.checked) {
-            employeeGender = gender.value;
-            break;
-        }
-    }
-
-    let departmentList = document.querySelectorAll('.checkbox:checked');
-    let employeeDepartment = new Array();
-    for (let department of departmentList) {
-        if (department.checked) {
-            employeeDepartment.push(department.value);
-        }
-    }
-
-    let employeeSalary = document.querySelector('#salary').value;
-
-    let day = document.querySelector('#day').value;
-    let month = document.querySelector('#month').value;
-    let year = document.querySelector('#year').value;
-    let employeeStartDate = new Date(year, month, day);
-
-    let employeeNotes = document.querySelector('#notes').value;
-
-    try {
-        let employeePayrollData = new EmployeePayrollData(employeeName, employeeProfileImage, employeeGender, employeeDepartment, employeeSalary, employeeStartDate, employeeNotes);
-        console.log(employeePayrollData.toString());
-    } catch (e) {
-        console.error(e);
-    }
-}
 
 //Day 44 : UC2:: On document, setting Event Listeners
 
@@ -147,7 +113,7 @@ window.addEventListener('DOMContentLoaded', (event) =>{
             return;
         }
         try {
-            (new EmployeePayrollData()).name = name.value;
+            (new EmployeePayrollData()).name = name.value;;
             textError.textContent = "";
         } catch (e){
             textError.textContent = e;
@@ -161,3 +127,63 @@ window.addEventListener('DOMContentLoaded', (event) =>{
         output.textContent = salary.value;
     });
 });
+
+//Day 44 : UC3:: On Save, Create Employee Payroll Object
+const save  = () => {
+    try {
+        let employeePayrollData = createEmployeePayroll();
+        createAndUpdateStorage(employeePayrollData);                //Day44 - UC4 Saving Employee Payroll to local storage
+    } catch (e){
+        return;
+    }
+}
+
+const createEmployeePayroll = () => {
+    let employeePayrollData = new EmployeePayrollData();
+    try {
+        employeePayrollData.name = getInputValueById('#name');
+    } catch (e) {
+        setTextValue('.text-error', e);
+        throw e;
+    }
+    employeePayrollData.profileImage = getSelectedValues('[name=profile]').pop();
+    employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
+    employeePayrollData.department = getSelectedValues('[name=department]');
+    employeePayrollData.salary = getInputValueById('#salary');
+    employeePayrollData.notes = getInputValueById('#notes');
+
+    let date = getInputValueById('#day') + " " + getInputValueById("#month") + " " + getInputValueById("#year");
+    employeePayrollData.date = Date.parse(date);
+    return employeePayrollData;
+    alert(employeePayrollData.toString());
+    return employeePayrollData;
+}
+
+const getSelectedValues = (propertyValue) => {
+    let allItem = document.querySelectorAll(propertyValue);
+    let selItem = [];
+    allItem.forEach(item => {
+        if(item.checked) selItem.push (item.value);
+    });
+    return selItem;
+}
+
+/* QuerySelector will used to find element */
+const getInputValueById = (id) => {
+    let value = document.querySelector(id).value;
+    return value;
+}
+
+//Day44-UC4 ::: Saving Employee Payroll to Local Storage
+function createAndUpdateStorage (employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+
+    if (employeePayrollList != undefined){
+        employeePayrollList.push(employeePayrollData);
+    } else {
+        employeePayrollList = [employeePayrollData]
+    }
+    alert(employeePayrollList.toString());
+    localStorage.setItem("EmployeePayrllList", JSON.stringify (employeePayrollList))
+}
+
