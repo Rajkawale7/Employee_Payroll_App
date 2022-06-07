@@ -187,3 +187,32 @@ function createAndUpdateStorage (employeePayrollData) {
     localStorage.setItem("EmployeePayrllList", JSON.stringify (employeePayrollList))
 }
 
+//Day44-UC5 ::: Ability to reset the form on clicking reset
+const resetForm = () => {
+    setValue('#name','');
+    unsetSelectedValue('[name=profile]');
+    unsetSelectedValue('[name=gender]');
+    unsetSelectedValue('[name=department]');
+    setValue('#salary', '');
+    setValue('#notes','');
+    setValue('#day','1');
+    setValue('#month','January');
+    setValue('#year','2020');
+}
+
+const unsetSelectedValue = (propertyValue) => {
+    let allItem = document.querySelectorAll(propertyValue);
+    allItem.forEach(item =>{
+        item.checked = false;
+    });
+}
+
+const setTextValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.textContent = value;
+}
+
+const setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value;
+}
