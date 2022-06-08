@@ -2,34 +2,39 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Employee_Payroll_Service</title>
         <link rel="stylesheet" href="Employee_Payroll_Service.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
         <script defer src="Employee_Payroll_Service.js"></script>
+        <script defer src="payroll_form.js"></script>
     </head>
 
     <body>
-        <header class="Header-content header">
+        <!-- UC 1-->
+        <header class="header-content header">
             <div class="logo-content">
-                <img src="./assets/Images/logo.png" alt="logo">
+                <img src="../assets/images/logo.png" alt="logo">
                 <div>
-                    <span class="emp-text">EMPLOYEE</span> <br>
-                    <span class="emp payroll">PAYROLL</span>
+                    <span class="emp-text">EMPLOYEE</span><br>
+                    <span class="emp-text emp-payroll">PAYROLL</span>
                 </div>
             </div>
         </header>
 
         <!-- UC 2 ::: Employee Payroll Form With Header And Name -->
-        <div id = "formID" class="form-content">
-            <form class="form" action="#" onreset = "resetForm()" onsubmit="save()">
-                <div class="form-head"> Employee Payroll Form </div>
+        <div class="form-content">
+            <form class="form" action="#" onreset="resetForm()" onsubmit="save()">
+
+                <div class="form-head">Employee Payroll Form</div>
                 <div class="row-content">
-                <label for="name" class="label text">Name</label>
-                <input type="text" name="name" id="name" class="input" placeholder="Your Name ..." required>
-                <error-output class="text-error" for ="text"></error-output>                                   <!-- Day 44-UC 2:: On Document Setting Event Listeners -->
+                    <label for="name" class="label text">Name</label>
+                    <input type="text" name="name" id="name" class="input" placeholder="Your Name ..." required>
+                    <error-output class="text-error" for="text"></error-output>
                 </div>
 
+                <!-- Day 44-UC 2:: On Document Setting Event Listeners -->
                 <!-- UC 3 ::: Ability to specify the profile pic in the form -->
                 <div class="row-content">
                     <label class="label text" for="profile">Profile image</label>
@@ -70,15 +75,15 @@
                 <div class="row-content">
                     <label class="label text" for="department">Department</label>
                     <div>
-                        <input class="checkbox" type="checkbox" id="hr" name="hr" value="HR">
+                        <input class="checkbox" type="checkbox" id="hr" name="department" value="HR">
                         <label class="text" for="hr">HR</label>
-                        <input class="checkbox" type="checkbox" id="sales" name="sales" value="Sales">
+                        <input class="checkbox" type="checkbox" id="sales" name="department" value="Sales">
                         <label class="text" for="sales">Sales</label>
-                        <input class="checkbox" type="checkbox" id="finance" name="finance" value="Finance">
+                        <input class="checkbox" type="checkbox" id="finance" name="department" value="Finance">
                         <label class="text" for="finance">Finance</label>
-                        <input class="checkbox" type="checkbox" id="engineer" name="engineer" value="Engineer">
+                        <input class="checkbox" type="checkbox" id="engineer" name="department" value="Engineer">
                         <label class="text" for="engineer">Engineer</label>
-                        <input class="checkbox" type="checkbox" id="others" name="others" value="Others">
+                        <input class="checkbox" type="checkbox" id="others" name="department" value="Others">
                         <label class="text" for="others">Others</label>
                     </div>
                 </div>
@@ -150,6 +155,7 @@
                             <option value="2016">2016</option>
                         </select>
                     </div>
+                    <error-output class="date-error" for="text"></error-output>
                 </div>
 
                 <!-- UC 6 ::: Ability to add the Notes and Button -->
@@ -166,16 +172,6 @@
                     </div>
                 </div>
             </form>
-
-            <!-- UC 8 ::: Ability to Set Event Listener on Salary Range to display appropriate value -->
-            <script>
-                const salary = document.querySelector ('#salary');
-                const output = document.querySelector('.salary-output');
-                output.textContent = salary.value;
-                salary.addEventListener('input', function() {
-                output.textContent = salary.value;
-                });
-            </script>          
         </div>
     </body> 
 </html>

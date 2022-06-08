@@ -1,25 +1,14 @@
 // UC 9 ::: On Form Submit populate the Employee Payroll Data Object by using JavaScript function
 //Day 44 - UC1//
 class EmployeePayrollData{
-    //constructor
-    constructor(...params){
-        this.name = params [0];
-        this.profileImage = params [1];
-        this.gender = params [2];
-        this.department = params [3];
-        this.salary = params [4];
-        this.startDate = params [5];
-        this.notes = params [6];
-        this.id = params[7];
-    }
-
+    
     //getter and setter method
     //Emp ID
-    get id(){
+    get id() {
         return this._id;
     }
 
-    set id(id){
+    set id(id) {
         this._id = id;
     }
 
@@ -28,17 +17,19 @@ class EmployeePayrollData{
         return this._name;
     }
 
-    set name(name){
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$')        //UC 10  & Day44-UC2 ::: Performing validation
+    set name(name) {
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
         if (nameRegex.test(name))
             this._name = name;
-        else throw "Name is Incorrect!";
+        else
+            throw "Name is Incorrect";
     }
 
     //profile Image
     get profileImage() {
         return this._profileImage;
     }
+
     set profileImage(profileImage) {
         this._profileImage = profileImage;
     }
@@ -47,19 +38,17 @@ class EmployeePayrollData{
     get gender() {
         return this._gender;
     }
+
     set gender(gender) {
-        let genderRegex = RegExp('^[female|male]+$');
-        if (genderRegex.test(gender))
-            this._gender = gender;
-        else
-            throw "Gender selection is incorrect";
+        this._gender = gender;
     }
 
     //department;
     get department() {
         return this._department;
     }
-    set department(value) {
+
+    set department(department) {
         this._department = department;
     }
     
@@ -67,152 +56,41 @@ class EmployeePayrollData{
     get salary() {
         return this._salary;
     }
+
     set salary(salary) {
-        let salaryRegx = RegExp('^[1-9][0-9]*$');                   //UC 10 ::: Performing validation
-        if (salaryRegx.test(salary))
-            this._salary = salary;
-        else
-            throw "Salary is in out of range";
+        this._salary = salary;
+
     }
 
     //StartDate
     get startDate() {
         return this._startDate;
     }
-    set startDate(value) {
-        this._startDate = startDate;
+
+    set startDate(startDate) {
+        var today = new Date();
+        const one_month_ago = new Date(today.setDate(today.getDate()-30));
+        today = new Date();
+        if(today < startDate || startDate < one_month_ago) {
+            throw 'Start date is invalid!';
+        }
+        else {
+            this._startDate = startDate;
+        }
     }
 
     //Notes
     get notes() {
         return this._notes;
     }
-    set notes(value) {
+
+    set notes(notes) {
         this._notes = notes;
     }
 
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const employeeDate = this.startDate == undefined ? "undefined" : 
-                            this.startDate.toLocaleDateString("en-us", options);
-        return "Id = " + this.id + ", Name = " + this.name + ", Profile Image = " + this.profileImage + ", Gender = " + this.gender + ", Department = " + this.department + ", Salary = " + this.salary 
-                + ", Start Date = " + employeeDate + ", Notes = " + this.notes;
+        const employeeDate = this.startDate == undefined ? "undefined" : this.startDate.toLocaleDateString("en-us", options);
+        return "Id = " + this.id + ", Name = " + this.name + ", Profile Image = " + this.profileImage + ", Gender = " + this.gender + ", Department = " + this.department + ", Salary = " + this.salary + ", Start Date = " + employeeDate + ", Notes = " + this.notes;
     }
-}
-
-
-
-//Day 44 : UC2:: On document, setting Event Listeners
-
-window.addEventListener('DOMContentLoaded', (event) =>{
-    const name = document.querySelector ('#name');
-    const textError = document.querySelector ('.text-error');
-    name.addEventListener('input', function(){
-        if(name.value.length == 0){
-            textError.textContent = "";
-            return;
-        }
-        try {
-            (new EmployeePayrollData()).name = name.value;;
-            textError.textContent = "";
-        } catch (e){
-            textError.textContent = e;
-        }
-    });
-
-    const salary = document.querySelector('#salary');
-    const output = document.querySelector('.salary-output');
-    output.textContent = salary.value;
-    salary.addEventListener('input', function(){
-        output.textContent = salary.value;
-    });
-});
-
-//Day 44 : UC3:: On Save, Create Employee Payroll Object
-const save  = () => {
-    try {
-        let employeePayrollData = createEmployeePayroll();
-        createAndUpdateStorage(employeePayrollData);              //Day44 - UC4 Saving Employee Payroll to local storage
-    } catch (e){
-        return;
-    }
-}
-x
-const createEmployeePayroll = () => {
-    let employeePayrollData = new EmployeePayrollData();
-    try {
-        employeePayrollData.name = getInputValueById('#name');
-    } catch (e) {
-        setTextValue('.text-error', e);
-        throw e;
-    }
-    employeePayrollData.profileImage = getSelectedValues('[name=profile]').pop();
-    employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
-    employeePayrollData.department = getSelectedValues('[name=department]');
-    employeePayrollData.salary = getInputValueById('#salary');
-    employeePayrollData.notes = getInputValueById('#notes');
-
-    let date = getInputValueById('#day') + " " + getInputValueById("#month") + " " + getInputValueById("#year");
-    employeePayrollData.date = Date.parse(date);
-    return employeePayrollData;
-    alert(employeePayrollData.toString());
-    return employeePayrollData;
-}
-
-const getSelectedValues = (propertyValue) => {
-    let allItem = document.querySelectorAll(propertyValue);
-    let selItem = [];
-    allItem.forEach(item => {
-        if(item.checked) selItem.push (item.value);
-    });
-    return selItem;
-}
-
-/* QuerySelector will used to find element */
-const getInputValueById = (id) => {
-    let value = document.querySelector(id).value;
-    return value;Reset
-}
-
-//Day44-UC4 ::: Saving Employee Payroll to Local Storage
-function createAndUpdateStorage (employeePayrollData) {
-    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
-
-    if (employeePayrollList != undefined){
-        employeePayrollList.push(employeePayrollData);
-    } else {
-        employeePayrollList = [employeePayrollData]
-    }
-    alert(employeePayrollList.toString());
-    localStorage.setItem("EmployeePayrllList", JSON.stringify (employeePayrollList))
-}
-
-//Day44-UC5 ::: Ability to reset the form on clicking reset
-const resetForm = () => {
-    setValue('#name','');
-    unsetSelectedValue('[name=profile]');
-    unsetSelectedValue('[name=gender]');
-    unsetSelectedValue('[name=department]');
-    setValue('#salary', '');
-    setValue('#notes','');
-    setValue('#day','1');
-    setValue('#month','January');
-    setValue('#year','2020');
-}
-
-const unsetSelectedValue = (propertyValue) => {
-    let allItem = document.querySelectorAll(propertyValue);
-    allItem.forEach(item =>{
-        item.checked = false;
-    });
-}
-
-const setTextValue = (id, value) => {
-    const element = document.querySelector(id);
-    element.textContent = value;
-}
-
-const setValue = (id, value) => {
-    const element = document.querySelector(id);
-    element.value = value;
 }
