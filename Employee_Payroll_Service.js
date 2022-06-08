@@ -10,6 +10,7 @@ class EmployeePayrollData{
         this.salary = params [4];
         this.startDate = params [5];
         this.notes = params [6];
+        this.id = params[7];
     }
 
     //getter and setter method
@@ -28,7 +29,7 @@ class EmployeePayrollData{
     }
 
     set name(name){
-        let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z\\s]{2,}$')        //UC 10  & Day44-UC2 ::: Performing validation
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$')        //UC 10  & Day44-UC2 ::: Performing validation
         if (nameRegex.test(name))
             this._name = name;
         else throw "Name is Incorrect!";
@@ -90,12 +91,11 @@ class EmployeePayrollData{
         this._notes = notes;
     }
 
-    //Method
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const employeeDate = !this.startDate ? "undefined" : 
-                            this.startDate.toLocaleDateString("en-US", options);
-        return "Name = " + this.name + ", Profile Image = " + this.profileImage + ", Gender = " + this.gender + ", Department = " + this.department + ", Salary = " + this.salary 
+        const employeeDate = this.startDate == undefined ? "undefined" : 
+                            this.startDate.toLocaleDateString("en-us", options);
+        return "Id = " + this.id + ", Name = " + this.name + ", Profile Image = " + this.profileImage + ", Gender = " + this.gender + ", Department = " + this.department + ", Salary = " + this.salary 
                 + ", Start Date = " + employeeDate + ", Notes = " + this.notes;
     }
 }
@@ -132,12 +132,12 @@ window.addEventListener('DOMContentLoaded', (event) =>{
 const save  = () => {
     try {
         let employeePayrollData = createEmployeePayroll();
-        createAndUpdateStorage(employeePayrollData);                //Day44 - UC4 Saving Employee Payroll to local storage
+        createAndUpdateStorage(employeePayrollData);              //Day44 - UC4 Saving Employee Payroll to local storage
     } catch (e){
         return;
     }
 }
-
+x
 const createEmployeePayroll = () => {
     let employeePayrollData = new EmployeePayrollData();
     try {
@@ -171,7 +171,7 @@ const getSelectedValues = (propertyValue) => {
 /* QuerySelector will used to find element */
 const getInputValueById = (id) => {
     let value = document.querySelector(id).value;
-    return value;
+    return value;Reset
 }
 
 //Day44-UC4 ::: Saving Employee Payroll to Local Storage

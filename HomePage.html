@@ -22,47 +22,27 @@
     </header>
 
     <!--Day 45: UC2 Employee Payroll Form with Header and Name ::-->
-    <div class = "main content">
-        <div class = "Header-content">
-            <div class = "emp-detail-text">
-                Employee Details <div class = "emp-count"> 10 </div>
+    <div class="main-content">
+        <div class="header-content employee-header">
+            <div class="emp-detail-text">Employee Details
+                <div class="emp-count">10</div>
             </div>
             <a href="Employee_Payroll_Service.html" class="add-button">
-                <img src="C:\Users\Raj Kawale\OneDrive\Desktop\JavaScript\EmployeePayrollService_HTML\assets\Profile-Images" alt="">Add User
-            </a>
+            <img src="C:\Users\Raj Kawale\OneDrive\Desktop\JavaScript\EmployeePayrollService_HTML\assets\Icons\add-24px.svg" alt=""> + ADD USER</a>
         </div>
-    </div>
+            
 
-    <!--Day 45: UC3 Display Employee Details in Tabular formate ::-->
-    <table id = "display" class="table">
-
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Department</th>
-            <th>Salary</th>
-            <th>Start Date</th>
-            <th>Actions</th>
-        </tr>
-
-        <tr>
-            <td><img class = "Profile" src="../assets/profile-images/Ellipse -03.png" alt="profile_img-1"></td>
-
-            <td> Raj Kawale </td>
-            <td> Male </td>
-            <td>
-                <div class='dept-label'>Engineer</div>
-                <div class='dept-label'>Finance</div>
-            </td>
-            <td>300000</td>
-            <td>1 Nov 2020</td>
-            <td>
-                <img src="../assets/icons/delete-black-18dp.svg" alt="delete" id="1" onclick="remove(this)">
-                <img src="../assets/icons/create-black-18dp.svg" alt="edit" id="1" onclick="update(this)">
-            </td>
-        </tr>
-    </table>
-
+        <!--Day 45: UC3 Display Employee Details in Tabular formate ::-->
+        <!--Header content-->
+        <div class = "table-main"></div>
+        <table id = "table-display" class="table">
+            <!--Removed Data and added into HomePage.js--> 
+        </table>
+    </div>  <!--table-main-->
+    </div> <!--main-content-->
+    <Script src="HomePage.js"> </Script>
+    <Script src="utility.js"></Script>
+    <Script src="site_properties.js"></Script>
+    <Script src="Employee_Payroll_Service.js"> </Script>
 </body>
 </html>
