@@ -1,5 +1,6 @@
 //Day45-UC4 ::: Display Employee Details in Tabular format using Template Literals
 //Day45-UC5 ::: Display All Employee Payroll Details from JSON
+//Day45-UC6 ::: Ability to view Employee Payroll details from Local Storage.
 let employeePayrollList;
 window.addEventListener('DOMContentLoaded', (event) => {
     employeePayrollList = getEmployeePayrollDataFromStorage();
@@ -37,7 +38,7 @@ innerHtml = `${innerHtml}
 document.querySelector('#table-display').innerHTML = innerHtml;
 }
 
-const getDepartmentHtml = (departmentList) => {
+const getDepartmentHtml = (departmentList) => {     //UC6 : Getting Data 
     let departmentHtml = '';
     for(const department of departmentList){
       departmentHtml = `${departmentHtml} <div class='dept-label'>${department}</div>`
