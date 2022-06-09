@@ -28,10 +28,10 @@ innerHtml = `${innerHtml}
         <td>${employeePayrollData._gender}</td>
         <td>${getDepartmentHtml(employeePayrollData._department)}</td>
         <td>${employeePayrollData._salary}</td>
-        <td>${stringifyDate(employeePayrollData._startDate)}</td>
+        <td>${stringifyDate(employeePayrollData.fullDate)}</td>
         <td>
-        <img id ="${employeePayrollData._id}" src="../assets/icons/delete-black-18dp.svg" alt="delete" onclick="remove(this)">
-        <img id ="${employeePayrollData._id}" src="../assets/icons/create-black-18dp.svg" alt="edit" onclick="update(this)">
+        <img id ="${employeePayrollData._name}" src="../assets/icons/delete-black-18dp.svg" alt="delete" onclick="remove(this)">
+        <img id ="${employeePayrollData._name}" src="../assets/icons/create-black-18dp.svg" alt="edit" onclick="update(this)">
         </td>
     </tr>`;
 }
@@ -48,7 +48,7 @@ const getDepartmentHtml = (departmentList) => {     //UC6 : Getting Data
 
 //Day 46-UC1::: Remove function
 const remove = (node) => {
-  let employeePayrollData = employeePayrollList.find(empData => empData._id == node.id);
+  let employeePayrollData = employeePayrollList.find(empData => empData._name == node.id);
   if (!employeePayrollData) return;
   const index = employeePayrollList
                 .map(empData => empData._id)
@@ -57,3 +57,12 @@ const remove = (node) => {
   localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
   createInnerHtml();
 }
+
+//Day 46-UC2::: Edit or update function
+const update = (node) => {
+  let employeePayrollData = employeePayrollList.find(empData => empData._name == node.id)
+  if (!employeePayrollData) return;
+  localStorage.setItem('editEmp', JSON.stringify(employeePayrollData))
+  window.location.replace(site_properties.add_emp_payroll_page)
+}
+

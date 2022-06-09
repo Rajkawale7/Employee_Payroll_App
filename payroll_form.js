@@ -1,4 +1,6 @@
 //Day 44 : UC2:: On document, setting Event Listeners
+let isUpdate = false;         //Day 46-UC1-UC2
+let employeePayrollObj = {}; //To check for an update
 
 window.addEventListener('DOMContentLoaded', (event) => {
     const name = document.querySelector('#name');
@@ -24,6 +26,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     salary.addEventListener('input', function() {
     output.textContent = salary.value;
     });
+
+    checkForUpdate();
 
     var date = document.getElementById("day");
     var month = document.getElementById("month");
@@ -69,10 +73,13 @@ const createEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues('[name=department]');
     employeePayrollData.salary = getInputValueById("#salary");
     employeePayrollData.notes = getInputValueById("#notes");
+    employeePayrollData.day = getInputValueById("#day");
+    employeePayrollData.month = getInputValueById("#month");
+    employeePayrollData.year = getInputValueById("#year");
 
-    let date = getInputValueById("#year") + "-" + getInputValueById("#month") + "-" + getInputValueById("#day");
-    employeePayrollData.date = Date.parse(date);
-  
+    var fullDate = employeePayrollData.day + " " + employeePayrollData.month + " " + employeePayrollData.year;
+    employeePayrollData.fullDate = fullDate;
+
     alert(employeePayrollData.toString());
     return employeePayrollData;
 }
@@ -138,4 +145,12 @@ const setTextValue = (id, value) => {
 const setValue = (id, value) => {
     const element = document.querySelector(id);
     element.value = value;
+}
+
+const checkForUpdate = () => { 
+    const employeePayrollJson =localStorage.getItem('editemp');
+    isUpdate = employeePayrollJson ? true : false;
+    if (!isUpdate) return;
+    employeePayrollObj = JSON.parse(employeePayrollJson);
+    setForm();
 }
